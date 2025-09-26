@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
+import NotFound from "components/NotFound/NotFound";
 import MovieSelection from "components/MovieSelection/MovieSelection";
 import { searchMovies } from "api/MovieApi"; // <-- uniquement la recherche par mot-clé
 import "./Home.css";
@@ -112,7 +113,11 @@ export default function Home() {
           </form>
         </div>
 
-        <MovieSelection selection={movies} />
+        <MovieSelection selection={movies} /> 
+
+        {(!loading && movies.length === 0 && query.trim()) && (
+          <NotFound />
+        )}
 
         {hasMore && (
           <button
